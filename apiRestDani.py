@@ -35,9 +35,10 @@ class Application(tornado.web.Application,dict):
         if response == 0:
             # TODO: check this!
             try:
-                self.con = MongoClient(dataJsonConf["machineParams"]["ip"], int(dataJsonConf["databaseParams"]["port"]))
+#            	self.con = MongoClient()
+                self.con = MongoClient(dataJsonConf["databaseParams"]["ip"], int(dataJsonConf["databaseParams"]["port"]))
                 if self.con == None:
-                    self.con = MongoClient("mongodb://"+dataJsonConf["machineParams"]["uri"]+"/")
+                    self.con = MongoClient("mongodb://"+dataJsonConf["databaseParams"]["uri"]+"/")
                 self.database = self.con[dataJsonConf["databaseParams"]["name"]]
             except:
                 print "Error: No database located with name",dataJsonConf["databaseParams"]["name"]
@@ -69,7 +70,7 @@ class UploadJSONHandler(tornado.web.RequestHandler):
 
         d = ast.literal_eval(data)
         # TODO: check insert OK with try catch
-        db[self.dataJsonConf["databaseParams"]["name"]].insert(d)
+        db[self.dataJsonConf["collections"]["jsons"]].insert(d)
         self.write("200")
 
 
