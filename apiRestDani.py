@@ -1,4 +1,5 @@
 from pymongo import MongoClient
+import gridfs
 
 import tornado.httpserver
 import tornado.ioloop
@@ -35,11 +36,11 @@ class Application(tornado.web.Application,dict):
         if response == 0:
             # TODO: check this!
             try:
-#            	self.con = MongoClient()
                 self.con = MongoClient(dataJsonConf["databaseParams"]["ip"], int(dataJsonConf["databaseParams"]["port"]))
                 if self.con == None:
                     self.con = MongoClient("mongodb://"+dataJsonConf["databaseParams"]["uri"]+"/")
-                self.database = self.con[dataJsonConf["databaseParams"]["name"]]
+                self.dbname = self.con[dataJsonConf["databaseParams"]["name"]]
+                
             except:
                 print "Error: No database located with name",dataJsonConf["databaseParams"]["name"]
                 exit()
@@ -62,7 +63,7 @@ class UploadJSONHandler(tornado.web.RequestHandler):
         self.write("Hello from uploadJson")
 
     def post(self):
-        db = self.application.database
+        db = self.application.dbname
         try:
             data = str(json.loads(self.request.body.decode(self.dataJsonConf["databaseParams"]["codingJson"])))
         except:
