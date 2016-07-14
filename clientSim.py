@@ -38,7 +38,7 @@ class FileThread(QtCore.QThread):
 
 if __name__ == '__main__':
 	filesInPackage = 200
-	ip             = "92.222.90.158"
+	ip             = "localhost"
 	jsonPkgSim   = '{"session": {"date": "01072016,19:16","model": "Nexus5","location": {"lat": "39.4783691","lng": "-6.3421245"},"id": "1467393396324","name": "nombredelpaquete"}}'
 	allThreads = [None for i in range(filesInPackage)]
 
