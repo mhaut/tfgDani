@@ -46,7 +46,7 @@ if __name__ == '__main__':
 
 	for i in range(filesInPackage):
 		if allThreads[i].isRunning() == False:
-			print "Arrancando hilo", i, "imagen", cont
+			print "Arrancando hilo", i
 			allThreads[i].start()
 
 	while True:
