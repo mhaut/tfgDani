@@ -38,8 +38,11 @@ class FileThread(QtCore.QThread):
 
 
 if __name__ == '__main__':
-	filesInPackage = 100
-	jsonPkgSim   = '"session" : { "date" : "01 07 2016, 19:16", "model" : "Nexus 5", "location" : { "lat" : "39.4783691", "lng" : "-6.3421245" },"id" : "1467393396324", "name" : "nombre del paquete" }'
+	filesInPackage = 1
+	jsonPkgSim   = '{"session": {"date": "01072016,19:16","model": "Nexus5","location": {"lat": "39.4783691","lng": "-6.3421245"},"id": "1467393396324","name": "nombredelpaquete"}}'
+	#a = ast.literal_eval(jsonPkgSim)
+	#print a
+	#exit()
 	allThreads = [None for i in range(filesInPackage)]
 
 	for i in range(filesInPackage):
@@ -53,11 +56,14 @@ if __name__ == '__main__':
 			allThreads[i].start()
 			cont += 1
 
-	for i in range(len(allThreads)):
-		while (allThreads[i].isRunning()): pass
-		print "hilo terminado", i
+	while True:
+		running = 0
+		for i in range(len(allThreads)):
+			running += allThreads[i].isRunning()
+		if running == 0: # 
+			break
 
-	req = urllib2.Request(self.ipDirection+"/json")
+	req = urllib2.Request("http://localhost:12342/json")
 	req.add_header('Content-Type', 'application/json')
 	response = urllib2.urlopen(req, json.dumps(ast.literal_eval(jsonPkgSim)))
 	print "TODO SUBIDO"
