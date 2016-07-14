@@ -1,0 +1,27 @@
+{
+    "machineParams":
+        {
+            "ip":"ip of machine",
+            "port":"port of APIRest",
+            "uri": "localhost:12342",
+            "otherMachineParam":"otherMachineValue"
+        },
+    "databaseParams":
+        {
+	    "ip":"ip of mongo",
+            "port":"port of Mongo",
+            "name":"name of database",
+            "codingJson":"utf-8",
+            "otherDatabaseParam":"otherDatabaseValue"
+        },
+    "collections":
+	{
+	    "jsons":"collection's name",
+            "photos":"collection's name",
+            "otherCollections":"otherCollections"
+	},
+    "otherParams":
+        {
+            "otherOtherParam":"otherOtherValue"
+        }
+}
