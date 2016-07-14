@@ -32,7 +32,6 @@ class FileThread(QtCore.QThread):
 		req = urllib2.Request(self.ipDirection+"/json")
 		req.add_header('Content-Type', 'application/json')
 		response = urllib2.urlopen(req, json.dumps(ast.literal_eval(self.jsonImageSim)))
-		time.sleep(3) # artificial time delay
 		print "ENVIADO"
 		self.terminate()
 
@@ -45,13 +44,10 @@ if __name__ == '__main__':
 	for i in range(filesInPackage):
 		allThreads[i] = FileThread(pathFiles="gatitos/",fileName="gatitos"+str(i)+".jpg")
 
-	cont = 0
 	for i in range(filesInPackage):
 		if allThreads[i].isRunning() == False:
 			print "Arrancando hilo", i, "imagen", cont
-			allThreads[i].setProcessImageCounter(cont)
 			allThreads[i].start()
-			cont += 1
 
 	while True:
 		running = 0
