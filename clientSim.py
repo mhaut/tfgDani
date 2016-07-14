@@ -40,9 +40,6 @@ class FileThread(QtCore.QThread):
 if __name__ == '__main__':
 	filesInPackage = 1
 	jsonPkgSim   = '{"session": {"date": "01072016,19:16","model": "Nexus5","location": {"lat": "39.4783691","lng": "-6.3421245"},"id": "1467393396324","name": "nombredelpaquete"}}'
-	#a = ast.literal_eval(jsonPkgSim)
-	#print a
-	#exit()
 	allThreads = [None for i in range(filesInPackage)]
 
 	for i in range(filesInPackage):
