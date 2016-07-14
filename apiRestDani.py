@@ -88,8 +88,10 @@ class UploadPhotoHandler(tornado.web.RequestHandler):
 
     def post(self):
         picture_file = self.request.files['picture'][0]
-        fname = picture_file['filename']
-        output_file = open( fname, 'w')
+        filepath = picture_file['filename']
+	filename = filepath.split('/')
+        filename = filename[len(filename)-1]
+	output_file = open( filename, 'w')
         output_file.write(picture_file['body'])
 
 
